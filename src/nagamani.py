@@ -7,10 +7,11 @@ import qiskit.quantum_info as qi
 import matplotlib.pyplot as plt
 
 qreg_q = QuantumRegister(13, 'q')
-
 circuit = QuantumCircuit(qreg_q)
+
 a = "0110"
 b = "0010"
+
 if (a[3] == '1'):
     circuit.x(qreg_q[0]) # a0
 if (a[2] == '1'):
