@@ -6,11 +6,14 @@ from qiskit.visualization import plot_histogram, plot_state_city
 import qiskit.quantum_info as qi
 import matplotlib.pyplot as plt
 
-qreg_q = QuantumRegister(13, 'q')
-circuit = QuantumCircuit(qreg_q)
 
 first_addend = 1
 second_addend = 2
+
+
+qreg_q = QuantumRegister(13, 'q')
+circuit = QuantumCircuit(qreg_q)
+
 a = f'{first_addend:04b}'
 b = f'{second_addend:04b}'
 
@@ -95,7 +98,8 @@ s2 = value[-7]
 s3 = value[-10]
 cout = value[0]
 
-print("Sum: ",int(str(cout)+str(s3)+str(s2)+str(s1) + str(s0),2))
+print(first_addend, "+", second_addend, "=", int(str(cout)+str(s3)+str(s2)+str(s1)+str(s0),2))
+
 
 #plot_histogram(counts, title='Bell-State counts')
 #plt.show()
