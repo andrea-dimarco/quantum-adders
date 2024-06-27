@@ -7,8 +7,8 @@ import qiskit.quantum_info as qi
 import matplotlib.pyplot as plt
 
 
-first_addend = 10
-second_addend = 10
+first_addend = 8
+second_addend = 3
 
 
 qreg_q = QuantumRegister(16, 'q')
@@ -19,6 +19,7 @@ b = f'{second_addend:05b}'
 
 #for i in range(7):
 #    circuit.x(qreg_q[i])
+
 if (a[4] == '1'):
     circuit.x(qreg_q[0]) # a0
 if (a[3] == '1'):
@@ -31,7 +32,7 @@ if (a[0] == '1'):
     circuit.x(qreg_q[13]) # a3
 
 if (b[4] == '1'):
-    circuit.x(qreg_q[2]) # b0
+    circuit.x(qreg_q[2]) # a0
 if (b[3] == '1'):
     circuit.x(qreg_q[5]) # b0
 if (b[2] == '1'):
@@ -48,35 +49,49 @@ if (b[0] == '1'):
 #circuit.x(qreg_q[9]) # S3
 #circuit.x(qreg_q[12]) # Carry
 
-
 circuit.ccx(qreg_q[1], qreg_q[2], qreg_q[3])
+circuit.barrier(qreg_q[0])
 circuit.cx(qreg_q[2], qreg_q[1])
+circuit.x(qreg_q[0])
 circuit.ccx(qreg_q[0], qreg_q[1], qreg_q[3])
+circuit.x(qreg_q[0])
 circuit.cx(qreg_q[0], qreg_q[1])
 circuit.barrier(qreg_q[0], qreg_q[1], qreg_q[2], qreg_q[3], qreg_q[4], qreg_q[5], qreg_q[6], qreg_q[7], qreg_q[8], qreg_q[9], qreg_q[10], qreg_q[11], qreg_q[12], qreg_q[13], qreg_q[14], qreg_q[15])
 circuit.ccx(qreg_q[3], qreg_q[5], qreg_q[6])
+circuit.barrier(qreg_q[4])
 circuit.cx(qreg_q[5], qreg_q[3])
+circuit.x(qreg_q[4])
 circuit.ccx(qreg_q[3], qreg_q[4], qreg_q[6])
+circuit.x(qreg_q[4])
 circuit.cx(qreg_q[4], qreg_q[3])
 circuit.barrier(qreg_q[0], qreg_q[1], qreg_q[2], qreg_q[3], qreg_q[4], qreg_q[5], qreg_q[6], qreg_q[7], qreg_q[8], qreg_q[9], qreg_q[10], qreg_q[11], qreg_q[12], qreg_q[13], qreg_q[14], qreg_q[15])
 circuit.ccx(qreg_q[6], qreg_q[8], qreg_q[9])
+circuit.barrier(qreg_q[7])
 circuit.cx(qreg_q[8], qreg_q[6])
+circuit.x(qreg_q[7])
 circuit.ccx(qreg_q[6], qreg_q[7], qreg_q[9])
+circuit.x(qreg_q[7])
 circuit.cx(qreg_q[7], qreg_q[6])
 circuit.barrier(qreg_q[0], qreg_q[1], qreg_q[2], qreg_q[3], qreg_q[4], qreg_q[5], qreg_q[6], qreg_q[7], qreg_q[8], qreg_q[9], qreg_q[10], qreg_q[11], qreg_q[12], qreg_q[13], qreg_q[14], qreg_q[15])
 circuit.ccx(qreg_q[9], qreg_q[11], qreg_q[12])
+circuit.barrier(qreg_q[10])
 circuit.cx(qreg_q[11], qreg_q[9])
+circuit.x(qreg_q[10])
 circuit.ccx(qreg_q[9], qreg_q[10], qreg_q[12])
+circuit.x(qreg_q[10])
 circuit.cx(qreg_q[10], qreg_q[9])
 circuit.barrier(qreg_q[0], qreg_q[1], qreg_q[2], qreg_q[3], qreg_q[4], qreg_q[5], qreg_q[6], qreg_q[7], qreg_q[8], qreg_q[9], qreg_q[10], qreg_q[11], qreg_q[12], qreg_q[13], qreg_q[14], qreg_q[15])
 circuit.ccx(qreg_q[12], qreg_q[14], qreg_q[15])
+circuit.barrier(qreg_q[13])
 circuit.cx(qreg_q[14], qreg_q[12])
+circuit.x(qreg_q[13])
 circuit.ccx(qreg_q[12], qreg_q[13], qreg_q[15])
+circuit.x(qreg_q[13])
 circuit.cx(qreg_q[13], qreg_q[12])
 
-showCircuit = False
+showCircuit = True
 if showCircuit:
-    circuit.draw(output="mpl",filename="nagamani-add.jpg")
+    circuit.draw(output="mpl",filename="nagamani-sub.jpg")
     plt.show()
 
 
@@ -99,7 +114,7 @@ s3 = value[-10]
 s4 = value[-13]
 cout = value[0]
 
-print(first_addend, "+", second_addend, "=", int(str(cout)+str(s4) + str(s3)+str(s2)+str(s1)+str(s0),2))
+print(first_addend, "-", second_addend, "=", int(str(cout)+str(s4)+str(s3)+str(s2)+str(s1)+str(s0),2))
 
 
 #plot_histogram(counts, title='Bell-State counts')
