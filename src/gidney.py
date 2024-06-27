@@ -84,6 +84,12 @@ cx q[12], q[13];
 """
 circuit = QuantumCircuit.from_qasm_str(qasm)
 
+showCircuit = False
+if showCircuit:
+    circuit.draw(output="mpl",filename="gidney.jpg")
+    plt.show()
+
+
 circuit.measure_all()
 # Transpile for simulator
 simulator = AerSimulator()

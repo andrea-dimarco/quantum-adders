@@ -9,8 +9,13 @@ import matplotlib.pyplot as plt
 qreg_q = QuantumRegister(13, 'q')
 circuit = QuantumCircuit(qreg_q)
 
-a = "0110"
-b = "0010"
+first_addend = 1
+second_addend = 2
+a = f'{first_addend:04b}'
+b = f'{second_addend:04b}'
+
+#for i in range(7):
+#    circuit.x(qreg_q[i])
 
 if (a[3] == '1'):
     circuit.x(qreg_q[0]) # a0
@@ -66,6 +71,13 @@ circuit.cx(qreg_q[11], qreg_q[9])
 circuit.ccx(qreg_q[9], qreg_q[10], qreg_q[12])
 circuit.cx(qreg_q[10], qreg_q[9])
 
+showCircuit = False
+if showCircuit:
+    circuit.draw(output="mpl",filename="circuit.jpg")
+    plt.show()
+
+
+
 circuit.measure_all()
 # Transpile for simulator
 simulator = AerSimulator()
@@ -83,7 +95,7 @@ s2 = value[-7]
 s3 = value[-10]
 cout = value[0]
 
-print("Sum: ",cout,s3,s2,s1,s0)
+print("Sum: ",int(str(cout)+str(s3)+str(s2)+str(s1) + str(s0),2))
 
 #plot_histogram(counts, title='Bell-State counts')
 #plt.show()
@@ -92,7 +104,5 @@ print("Sum: ",cout,s3,s2,s1,s0)
 # circ.h(0)
 # circ.cx(0, 1)
 # circ.measure_all()
-
-
 
 
