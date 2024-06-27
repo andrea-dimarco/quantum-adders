@@ -73,7 +73,7 @@ circuit.cx(qreg_q[10], qreg_q[9])
 
 showCircuit = False
 if showCircuit:
-    circuit.draw(output="mpl",filename="circuit.jpg")
+    circuit.draw(output="mpl",filename="nagamani-add.jpg")
     plt.show()
 
 

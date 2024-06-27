@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 qasm = """
 OPENQASM 2.0;
 include "qelib1.inc";
-gate stateT a {
+gate ketT a {
   h a;
   t a;
 }
@@ -45,10 +45,10 @@ qreg q[14];
 
 x q[1];
 x q[12];
-stateT q[2];
-stateT q[5];
-stateT q[8];
-stateT q[11];
+ketT q[2];
+ketT q[5];
+ketT q[8];
+ketT q[11];
 barrier q[0], q[1], q[2], q[3], q[4], q[5], q[6], q[7], q[8], q[9], q[10], q[11], q[12], q[13];
 lAND q[0], q[1], q[2];
 barrier q[0], q[1], q[2], q[3], q[4], q[5], q[6], q[7], q[8], q[9], q[10], q[11], q[12], q[13];
@@ -91,9 +91,9 @@ cx q[12], q[13];
 """
 circuit = QuantumCircuit.from_qasm_str(qasm)
 
-showCircuit = False
+showCircuit = True
 if showCircuit:
-    circuit.draw(output="mpl",filename="gidney.jpg")
+    circuit.draw(output="mpl",filename="gidney-rev.jpg")
     plt.show()
 
 
