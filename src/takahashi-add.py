@@ -1,13 +1,11 @@
-from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, transpile
-from numpy import pi
-import numpy as np
+from qiskit import QuantumRegister, QuantumCircuit, transpile
 from qiskit_aer import AerSimulator
 from qiskit.visualization import plot_histogram, plot_state_city
 import qiskit.quantum_info as qi
 import matplotlib.pyplot as plt
 
-showCircuit = False
-first_addend =16
+showCircuit = True
+first_addend = 16
 second_addend = 2
 
 qreg_q0 = QuantumRegister(11, 'q0')
@@ -17,8 +15,7 @@ circuit = QuantumCircuit(qreg_q0)
 a = f'{first_addend:05b}'
 b = f'{second_addend:05b}'
 
-#for i in range(7):
-#    circuit.x(qreg_q0[i])
+
 if (a[4] == '1'):
     circuit.x(qreg_q0[1]) #a0
 if (a[3] == '1'):
@@ -40,15 +37,6 @@ if (b[1] == '1'):
     circuit.x(qreg_q0[6]) # b2
 if (b[0] == '1'):
     circuit.x(qreg_q0[8]) # b3
-
-
-#circuit.x(qreg_q0[1]) # S0
-#circuit.x(qreg_q0[3]) # S1
-#circuit.x(qreg_q0[6]) # S2
-#circuit.x(qreg_q0[9]) # S3
-#circuit.x(qreg_q0[12]) # Carry
-
-
 
 
 circuit.cx(qreg_q0[9], qreg_q0[8])
@@ -86,16 +74,14 @@ if showCircuit:
     circuit.draw(output="mpl",filename="takahashi-add.jpg")
     plt.show()
 
-
-
 circuit.measure_all()
+
 # Transpile for simulator
 simulator = AerSimulator()
 circ = transpile(circuit, simulator)
 
 # Run and get counts
 result = simulator.run(circ).result()
-#print(result)
 counts = result.get_counts(circ)
 value = list(counts.keys())[0]
 
@@ -105,16 +91,6 @@ s2 = value[-5]
 s3 = value[-7]
 s4 = value[-9]
 cout = value[0]
-print(value)
 print(first_addend, "+", second_addend, "=", int(str(cout)+str(s4) + str(s3)+str(s2)+str(s1)+str(s0),2))
-
-
-#plot_histogram(counts, title='Bell-State counts')
-#plt.show()
-# # Create circuit
-# circ = QuantumCircuit(2)
-# circ.h(0)
-# circ.cx(0, 1)
-# circ.measure_all()
 
 
