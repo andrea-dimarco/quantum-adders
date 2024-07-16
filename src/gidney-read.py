@@ -7,8 +7,8 @@ import qiskit.quantum_info as qi
 import matplotlib.pyplot as plt
 
 
-first_addend = 11
-second_addend = 17
+first_addend = 30
+second_addend = 6
 
 
 qasm = """
@@ -146,7 +146,7 @@ result = simulator.run(circ).result()
 #print(result)
 counts = result.get_counts(circ)
 value = list(counts.keys())[0]
-
+print(value)
 s0 = value[12]
 s1 = value[9]
 s2 = value[6]
